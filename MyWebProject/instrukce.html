@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>New Web Project</title>
+    </head>
+    <body>
+        
+        <h1 align="center"> IP teploměr s digitálními a analogovými vstupy a výstupy </h1>
+        
+        
+        <h2> IP teploměr s digitálními a analogovými vstupy a výstupy </h2>
+        
+        
+        
+        <h3> Vlastnosti </h3>
+        <ol>
+        	<li>Čidlo DS18B20 nebo Pt100 s převodníkem (nejprve však simulované)</li>
+        	<li>Zobrazení teploty v grafu za poslední den, týden, měsíc a rok.</li>
+        	<li>Data budou ukládána na SD kartě.</li>
+        	<li>Bude využito RTC timeru pro přesné časování. Možnost synchronizace času s počítačem.</li>
+        	<li>Vše nastavitelné pomocí webserveru. Přístup přes administrátorské heslo.</li>
+        	<li>Vše nastavitelné pomocí webserveru. Přístup přes administrátorské heslo.</li>
+        	<li>Aktuální stav teploty vstupů i výstupu se bude automaticky refreshovat (bez nutnosti načtení celé stránky).</li>
+        	<li>Stav vstupů i výstupů se bude znázorňovat graficky.</li>
+        	<li>Aplikace bude obsahovat API pro přímé ovládání pomocí spojového rozhraní TCP.</li>
+        	<li>Možnost nastavení tresholdů k analogovým a digitálním vstupům s reakcí odeslání emailu na požadovaný email.</li>	
+        </ol>
+        
+        <h3> Postup </h3>
+        <ol>
+        	
+        	<li> 
+        		<h4> Vytvoření simulátoru v jazyce C#.</h4> 
+        		<ol>
+        			<li> Vytvoření formuláře pro přihlášení s použitím administrátorského hesla. </li>
+        			<li> Nadefinování stylu (barva pozadí, písma, nadpisy, rozmístění ...).</li> 
+        			<li> Vytvoření stylované hlavní stránky s použitím HTML a CSS.</li>
+        			<li> Vytvoření simulovaného vstupně výstupního zařízení.</li>
+        			<li> Napojení hlavní stránky na simulované zařízení.</li>
+        			<li> Vytvoření API pro přímý přístup k simulovanému zařízení.</li>
+        			<li> Vytvoření aplikace pro automatické testování přímého API.</li>
+        		</ol>	
+        	</li>
+        	
+        	
+        	<li> 
+        		<h4> Vytvoření aplikace na procesoru STM32 s OS FreeRTOS.</h4> 
+        		<ol>
+        			<li> Komunikace s en26j60. Odeslání jednoduchého paketu. </li>
+        			<li> Vytvoření UDP socketu pro vysílání. </li>
+        			<li> Vytvoření UDP socketu pro příjem. </li>
+        			<li> Vytvoření TCP socketu pro vysílání. </li>
+        			<li> Vytvoření TCP socketu pro příjem. </li>
+        			<li> Měření teploty pomocí čidla DS1820, ovládání vstupů a výstupů.</li>
+        			<li> Připojení SDcard a ukládání dat do souboru.</li>
+        			<li> Implementace web serveru - statické stránky.</li>
+        			<li> Implementace web serveru - plně funkční.</li>
+        			<li> Vytvoření api pro přímý přístup.</li>
+        			<li> Dokončení, správa napájení, dokumentace ...</li>
+        		</ol>	
+        	</li>
+        	
+        </ol>
+        
+        
+        <h3> Typy </h3>
+        <ol>
+        	<li>Na kreslení grafu použít SVG formát.</li>
+        	<li>Webserver a stack knihovny: http://mcu.cz/news.php?extend.3150.15</li>
+
+        </ol>
+        
+        
+        <h2> Úvodní stránka </h2>
+        <ol>
+        	<li>Barevné pozadí.</li>
+        	<li>Nadpis s Logem Nexus nahoře. Nexus speciálním písmem NeXuS</li>
+        	<li>Uprostřed zakulacený formulář s uživatelským jménem a heslem.</li>
+        	<li>Možnost zobrazit heslo, jinak hvězdičky. Tlačítko Login ... </li>
+        </ol>
+        
+        
+        <h2> Hlavní stránka </h2>
+        <ol>
+        	<li>Barevné pozadí.</li>
+        	<li>Nadpis s Logem Nexus nahoře. Nexus speciálním písmem NeXuS</li>
+        	<li> Vyrešit logout, takže dělat session.</li>
+        </ol>
+        
+                 
+        pridat moznost rebootu a nastavení defaultního nastavení
+        omezit pocet uzivatelu najednou na jednoho kvuli synchronizaci promennych
+        
+        
+        
+        <h1 id="nadpis" align="right">New Web Project Page</h1>
+        <input id="tlacitko" value="Nadpis na střed" type="button" onclick="Funkce()"/>
+        <input id="tlacitko2" value="Event" type="button"/>
+        
+        
+        
+        <a href="http://www.goldcoastwebdesigns.com/dl/aff-masters.zip" target="_blank">Download Link</a>
+        
+        
+        
+        
+        <script src="script.js"></script>
+		
+		
+    </body>
+</html>

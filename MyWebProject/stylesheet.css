@@ -1,0 +1,32 @@
+body {
+	background: #CCCCFF;
+	width: 80%;
+	margin: auto;
+}
+
+.NexusImage{
+	margin: 20px;	
+	width: 180px;
+	height: 48px;
+}
+
+
+form li
+{
+	list-style: none;
+	margin:auto;
+	margin-bottom: 10px;
+	width: 80%;
+}
+
+form label{
+	display: block;
+}
+
+form ul
+{
+	padding-left: 0px;
+	width: 220px;
+	margin:auto;
+	margin-top: 20px;
+

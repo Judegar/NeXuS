@@ -1,0 +1,94 @@
+﻿static void Main(string[] args)
+        {
+            byte[] ip = {127,0,0,0};
+            IPAddress ipAddress = Dns.Resolve("localhost").AddressList[0];
+            TcpListener listener = new TcpListener(ipAddress, 80);
+            listener.Start();
+ 
+            // Is someone trying to call us? Well answer!
+            //TcpClient ourTCP_Client = listener.AcceptTcpClient();
+
+            Socket sock = listener.AcceptSocket();
+
+            //A network stream object. We'll use this to send and receive our data, so create a buffer for it...
+            byte[] data = new byte[1000000];
+            int count  = sock.Receive(data);
+            Console.WriteLine("Received : " + Encoding.ASCII.GetString(data, 0, count));
+            // read the incoming data stream - note that Read() is a blocking call...
+
+            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
+
+
+            if (Encoding.ASCII.GetString(data, 0, count).Contains("favicon"))
+            {
+                sock.Send(Encoding.ASCII.GetBytes(MakeNotFoundResponse()));
+                Console.WriteLine(MakeNotFoundResponse());
+                sock.Close();
+
+                sock = listener.AcceptSocket();
+                Console.WriteLine("Socket accepted");
+                count = sock.Receive(data);
+                
+                Console.WriteLine("Received : " + Encoding.ASCII.GetString(data, 0, count));
+                
+                sock.Send(Encoding.ASCII.GetBytes(MakeHTTPResponse()));
+                Console.WriteLine(MakeHTTPResponse());
+            }
+            else 
+            {
+                sock.Send(Encoding.ASCII.GetBytes(MakeHTTPResponse()));
+                Console.WriteLine(MakeHTTPResponse());
+                sock.Close();
+
+                sock = listener.AcceptSocket();
+                Console.WriteLine("Socket accepted");
+                count = sock.Receive(data);
+
+                Console.WriteLine("Received : " + Encoding.ASCII.GetString(data, 0, count));
+
+            }
+            
+            // echo the data we got to the console until the newline, and delay closing our window.
+
+          
+           
+            Console.ReadLine();
+        }
+        
+        
+        
+        
+                static string html = "<html>\r\n<head><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\r\n<title>My C# web server</title>\r\n</head>\r\n<body>Hello world!</body></html>";
+        static string web_pages_path = @"C:\Users\user\Desktop\Webovky";
+
+        static string MakeHTTPResponse()
+        {
+            string resp = "HTTP/1.1 200 OK\r\n";
+          //  resp += "Date: Thu, 20 May 2004 21:15:12 GMT\r\n";
+          //  resp += "Connection: close\r\n";
+            resp += "Server: muj servrice\r\n";
+            resp += "Accept-Ranges: bytes\r\n";
+            resp += "Content-Type: text/html; charset=utf-8\r\n";
+            resp += "Content-Lenght:"+html.Length+"\r\n\r\n";
+           // resp += "Last-Modified: Thu, 20 May 2004 21:15:12 GMT\r\n\r\n";
+            resp += html;
+
+            return resp;
+        }
+
+        static string MakeNotFoundResponse()
+        {
+            string resp = "HTTP/1.1 200 OK\r\n";
+            //  resp += "Date: Thu, 20 May 2004 21:15:12 GMT\r\n";
+            //  resp += "Connection: close\r\n";
+          //  resp += "Connection: Keep-Alive\r\n";
+            resp += "Server: muj servrice\r\n";
+            resp += "Content-Type: image/x-icon\r\n";
+            resp += "Accept-Ranges: bytes\r\n";
+            //resp += "Content-Type: text/html; charset=utf-8\r\n";
+            resp += "Content-Lenght:" + "<html><body>debile</body></html>".Length + "\r\n\r\n";
+           // resp += "Last-Modified: Thu, 20 May 2004 21:15:12 GMT\r\n\r\n";
+            resp += "<html><body>debile</body></html>";
+
+            return resp;
+        }
